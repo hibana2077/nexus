@@ -9,12 +9,19 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@carbon/charts-svelte": "^1.13.27",
     "@sveltejs/vite-plugin-svelte": "^3.0.1",
     "autoprefixer": "^10.4.17",
+    "d3": "^7.8.5",
+    "d3-cloud": "^1.2.7",
+    "d3-sankey": "^0.12.3",
     "daisyui": "^4.6.1",
     "postcss": "^8.4.33",
     "svelte": "^4.2.8",
     "tailwindcss": "^3.4.1",
     "vite": "^5.0.8"
+  },
+  "dependencies": {
+    "plotly.js-dist-min": "^2.29.0"
   }
 }

@@ -17,11 +17,14 @@
     "d3-sankey": "^0.12.3",
     "daisyui": "^4.6.1",
     "postcss": "^8.4.33",
+    "simple-svelte-autocomplete": "^2.5.2",
     "svelte": "^4.2.8",
     "tailwindcss": "^3.4.1",
     "vite": "^5.0.8"
   },
   "dependencies": {
+    "@bentogrid/core": "^1.1.1",
+    "lightweight-charts": "^4.1.2",
     "plotly.js-dist-min": "^2.29.0"
   }
 }

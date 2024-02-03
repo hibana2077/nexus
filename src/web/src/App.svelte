@@ -4,9 +4,9 @@
 	import '@carbon/charts-svelte/styles.css';
   import AutoComplete from "simple-svelte-autocomplete";
   import Main from './lib/Main.svelte';
-  import Profile from './lib/Profile.svelte';
   import About from './lib/About.svelte';
   import Error from './lib/Error.svelte';
+  import Find from './lib/Find.svelte';
 
   const stocks_nums = ["0050", "00878", "2330", "0051"]
   let selectedStock = writable("")
@@ -82,26 +82,7 @@
 
 <!-- find page  -->
 
-<div class="flex items-center justify-center mt-8">
-  <div class="bg-base-300 p-4 rounded-box shadow-xl w-112">
-    <h2 class="text-2xl my-4 text-center">
-      <strong>
-        Find Stock
-      </strong>
-    </h2>
-    <div class="divider divider-start">行業類別</div>
-    <div class="form-control grid grid-cols-4 gap-2">
-      <label class="label cursor-pointer">
-        <span class="label-text mr-2">水泥工業</span> 
-        <input type="checkbox" checked="checked" class="checkbox" value="01" />
-      </label>
-    </div>
-  </div>
-</div>
-
-
-<button class="btn" onclick="stock.showModal()">open modal</button>
-<Profile stock_id="2330" dialog_id="stock" />
+<Find />
 
 {:else}
 

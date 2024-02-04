@@ -1,6 +1,7 @@
 <script>
 // @ts-nocheck
     import Profile from "./Profile.svelte";
+    import { writable } from "svelte/store";
 
     const StockCatData = [
     {
@@ -189,6 +190,8 @@
         price: 25
     }
 
+    let stock_num = writable("");
+
     function Search() {
         let cat = [];
         document.querySelectorAll('.checkbox').forEach((el) => {
@@ -201,6 +204,11 @@
         select_condition.dividend = document.querySelector('#dividend').value;
         select_condition.safety = document.querySelector('#safety').value;
         console.log(select_condition);
+    }
+
+    function showmore(stock_id) {
+        stock_num.set(stock_id);
+        popup.showModal();
     }
 </script>
 
@@ -267,20 +275,74 @@
 
 <div class="flex items-center justify-center mt-8">
     <div class="w-96 h-60 bg-base-200 rounded-box grid grid-cols-5 grid-rows-5 gap-2 p-4">
-        <div class="bg-base-300 border-solid border-2 rounded-box border-primary row-span-3 col-span-4">
-            Area1
+        <div class="bg-base-300 hover:border-solid hover:border-2 rounded-box hover:border-primary row-span-3 col-span-4 tooltip" data-tip="股票名稱">
+            <div class="grid grid-cols-2">
+                <div class="col-span-1">
+                    <h2 class="text-2xl text-center mt-6">
+                        <strong>
+                        台積電
+                        </strong>
+                    </h2>
+                </div>
+                <div class="col-span-1">
+                    <h2 class="text-2xl text-center mt-6 text-green-500">
+                        <strong>
+                        500
+                        </strong>
+                    </h2>
+                </div>
+            </div>
+            <div class="grid grid-cols-2">
+                <div class="col-span-1">
+                    <h2 class="text-xl text-center mb-6">
+                        <strong>
+                        2330
+                        </strong>
+                    </h2>
+                </div>
+                <div class="col-span-1">
+                    <h2 class="text-xl text-center mb-6 text-green-500">
+                        <strong>
+                        +5
+                        </strong>
+                    </h2>
+                </div>
+            </div>
         </div>
-        <div class="bg-base-300 border-solid border-2 rounded-box border-primary row-span-3 col-span-1">
-            Area2
+        <div class="bg-base-300 hover:border-solid hover:border-2 rounded-box hover:border-primary row-span-3 col-span-1 tooltip" data-tip="52週變化">
+            <div class="text-center my-8 text-xl text-green-500">
+                + 20%
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto fill-green-500" viewBox="0 0 512 512"><path d="M414 321.94L274.22 158.82a24 24 0 00-36.44 0L98 321.94c-13.34 15.57-2.28 39.62 18.22 39.62h279.6c20.5 0 31.56-24.05 18.18-39.62z"/></svg>
+            </div>
         </div>
-        <div class="bg-base-300 border-solid border-2 rounded-box border-primary row-span-2 col-span-3">
-            Area3
+        <div class="bg-base-300 hover:border-solid hover:border-2 rounded-box hover:border-primary row-span-2 col-span-3 tooltip" data-tip="股票資訊">
+            <div class="grid grid-cols-2">
+                <div class="col-span-1">
+                    <h2 class="text-xl text-center my-2">
+                        EPS<br/>
+                        <strong>
+                        32.32
+                        </strong>
+                    </h2>
+                </div>
+                <div class="col-span-1">
+                    <h2 class="text-xl text-center my-2">
+                        每股收入
+                        <strong>
+                        83.371
+                        </strong>
+                    </h2>
+                </div>
+            </div>
         </div>
-        <div class="bg-base-300 border-solid border-2 rounded-box border-primary row-span-2 col-span-2">
-            Area4
-        </div>
+        <button class="bg-base-300 rounded-box row-span-2 col-span-2 hover:glass transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 tooltip" data-tip="Click to see more" on:click={() => showmore("2330")}>
+            <div class="text-green-500 text-center my-6 text-xl">
+                <!-- AI recommend -->
+                Good
+            </div>
+        </button>
     </div>
 </div>
-  
-<button class="btn" onclick="stock.showModal()">open modal</button>
-<Profile stock_id="2330" dialog_id="stock" />
+
+<!-- <button class="btn" onclick="stock.showModal()">open modal</button> -->
+<Profile stock_id="{$stock_num}" dialog_id="popup" />

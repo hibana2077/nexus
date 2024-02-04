@@ -5,8 +5,10 @@
 
 <dialog id={dialog_id} class="modal">
     <div class="modal-box w-11/12 max-w-5xl">
-      <h3 class="font-bold text-lg">Stock ID: {stock_id}</h3>
-      <p class="py-4">Click the button below to close</p>
+      <h2 class="font-bold text-lg text-center mb-4">{stock_id} Detail</h2>
+      <p class="flex items-center justify-center">
+        <iframe title="Stock Chart" frameBorder='0' scrolling='no' width='800' height='420' src='https://api.stockdio.com/visualization/financial/charts/v1/HistoricalPrices?app-key=8534C99CCADD4AFDB1D17BD809453DD7&indicators=BollingerBands(10,2.0);&stockExchange=TWSE&symbol={stock_id}&days=180&displayPrices=Candlestick&dividends=true&splits=true&motif=Block&palette=Aurora&googleFont=true'></iframe>
+      </p>
       <div class="modal-action">
         <form method="dialog">
           <!-- if there is a button, it will close the modal -->

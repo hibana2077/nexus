@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+qrcode[pil]
+pymongo
+pyjwt
+ping3
+requests

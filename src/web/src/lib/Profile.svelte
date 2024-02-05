@@ -1,49 +1,13 @@
 <script>
-  import { writable } from "svelte/store";
 
   export let stock_id = 'ID';
   export let dialog_id = 'no-name';
   export let stock_name = '台積電';
-  export let dividend = "5";
-  export let safety = "0.8";
+  export let bookValue_evaulate = "Loading";
+  export let dividend_evaulate = "Loading";
+  export let bookValue = "Loading";
+  export let fair_price = "Loading";
 
-  // need to connect to api to get data
-  const url = 'http://0.0.0.0:8000/profile/singlestock';
-  let stock_detail = writable({
-    bookValue_evaulate: "Loading",
-    dividend_evaulate: "Loading",
-    bookValue: "Loading",
-    fair_price: "Loading"
-  });
-  let search_done = false;
-
-  function getStockDetail() {
-    search_done = false;
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        stock: stock_id,
-        dividend_rate: dividend,
-        safety: safety
-      })
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log("Data received:", data); // 檢查接收到的數據
-      stock_detail.set(data);
-      search_done = true;
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-      // 可能您需要在這裡處理錯誤，例如通過設置某個狀態或顯示錯誤消息
-    });
-  }
-
-
-  $: getStockDetail();
 </script>
 
 <dialog id={dialog_id} class="modal">
@@ -60,48 +24,32 @@
           </p>
         </div>
         <div class="hover:border-solid hover:border-2 rounded-box hover:border-primary bg-base-300 tooltip" data-tip="股價淨值評估">
-          {#if search_done}
-            <p class="text-center">
-              <strong>
-                {stock_detail.bookValue_evaulate}
-              </strong>
-            </p>
-          {:else}
-            <span class="items-center loading loading-spinner loading-lg"></span>
-          {/if}
+          <p class="text-center">
+            <strong>
+              {bookValue_evaulate}
+            </strong>
+          </p>
         </div>
         <div class="hover:border-solid hover:border-2 rounded-box hover:border-primary bg-base-300 tooltip" data-tip="現金股利評估">
-          {#if search_done}
-            <p class="text-center">
-              <strong>
-                {stock_detail.dividend_evaulate}
-              </strong>
-            </p>
-          {:else}
-            <span class="items-center loading loading-spinner loading-lg"></span>
-          {/if}
+          <p class="text-center">
+            <strong>
+              {dividend_evaulate}
+            </strong>
+          </p>
         </div>
         <div class="hover:border-solid hover:border-2 rounded-box hover:border-primary bg-base-300 tooltip" data-tip="股價淨值評估合理價">
-          {#if search_done}
-            <p class="text-center">
-              <strong>
-                {stock_detail.bookValue}
-              </strong>
-            </p>
-          {:else}
-            <span class="items-center loading loading-spinner loading-lg"></span>
-          {/if}
+          <p class="text-center">
+            <strong>
+              {bookValue}
+            </strong>
+          </p>
         </div>
         <div class="hover:border-solid hover:border-2 rounded-box hover:border-primary bg-base-300 tooltip" data-tip="現金股利評估合理價">
-          {#if search_done}
-            <p class="text-center">
-              <strong>
-                {stock_detail.fair_price}
-              </strong>
-            </p>
-          {:else}
-            <span class="items-center loading loading-spinner loading-lg"></span>
-          {/if}
+          <p class="text-center">
+            <strong>
+              {fair_price}
+            </strong>
+          </p>
         </div>
       </div>
       <div class="modal-action">

@@ -199,6 +199,12 @@
     let have_a_search = writable(false);
     let searchjob_done = writable(false);
     let search_result = writable([]);
+    let stock_detail = writable({
+        bookValue_evaulate: "Loading",
+        dividend_evaulate: "Loading",
+        bookValue: "Loading",
+        fair_price: "Loading"
+    });
 
     function Search() {
         have_a_search.set(false);
@@ -245,6 +251,32 @@
     function showmore(stock_id, name) {
         stock_num.set(stock_id);
         stock_name.set(name);
+
+        // search stock detail
+        const url = 'http://0.0.0.0:8000/profile/singlestock';
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                stock: stock_id,
+                dividend_rate: document.querySelector('#dividend').value.toString(),
+                safety: document.querySelector('#safety').value.toString()
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Data received:", data); // 檢查接收到的數據
+                stock_detail.set(data);
+                search_done = true;
+            })
+            .catch((error) => {
+            console.error('Error:', error);
+            // 可能您需要在這裡處理錯誤，例如通過設置某個狀態或顯示錯誤消息
+        });
+
         popup.showModal();
     }
 </script>
@@ -324,6 +356,6 @@
     {/if}
 </div>
 
-{#if $stock_num}
-    <Profile stock_id={$stock_num} dialog_id="popup" stock_name={$stock_name} />
+{#if $have_a_search && $searchjob_done}
+    <Profile stock_id={$stock_num} dialog_id="popup" stock_name={$stock_name} bookValue_evaulate={$stock_detail.bookValue_evaulate} dividend_evaulate={$stock_detail.dividend_evaulate} bookValue={$stock_detail.bookValue} fair_price={$stock_detail.fair_price} />
 {/if}

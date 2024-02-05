@@ -2,7 +2,7 @@
 Author: hibana2077 hibana2077@gmail.com
 Date: 2024-02-02 17:41:30
 LastEditors: hibana2077 hibana2077@gmail.com
-LastEditTime: 2024-02-05 21:44:00
+LastEditTime: 2024-02-05 23:10:00
 FilePath: /nexus/src/backend/main.py
 Description: This is a FastAPI application that uses the Fugle API to get stock information.
 '''
@@ -22,7 +22,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # 指定允許的來源
+    allow_origins=["*"],  # 允許所有來源
     allow_credentials=True,
     allow_methods=["*"],  # 允許所有方法
     allow_headers=["*"],  # 允許所有標頭

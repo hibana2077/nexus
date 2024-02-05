@@ -2,7 +2,7 @@
 Author: hibana2077 hibana2077@gmail.com
 Date: 2024-02-02 15:55:26
 LastEditors: hibana2077 hibana2077@gmail.com
-LastEditTime: 2024-02-05 13:39:29
+LastEditTime: 2024-02-05 22:04:43
 FilePath: /stock/info.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -68,8 +68,8 @@ def get_stock_info(stock:str):
     stock_info['priceToBook'] = round(stock.info['priceToBook'],5) if 'priceToBook' in stock.info else None
     stock_info['eps'] = stock.info['trailingEps'] if 'trailingEps' in stock.info else None
     stock_info['income'] = stock.info['netIncomeToCommon'] if 'netIncomeToCommon' in stock.info else None
-    stock_info['price'] = round(stock.history(period='1d').Close[0],2) if 'B' not in stock_info['code'] else None
-    stock_info['prev_day_change'] = round(stock.history(period='2d').diff().Close[1],2) if 'B' not in stock_info['code'] else None
+    stock_info['price'] = round(stock.history(period='1d').Close[0],2) if ('B' not in stock_info['code']) and (stock_info['stock_class'] != 'ETF') and (stock_info['stock_class'] != "受益證券")else None
+    stock_info['prev_day_change'] = round(stock.history(period='2d').diff().Close[1],2) if ('B' not in stock_info['code']) and (stock_info['stock_class'] != 'ETF') and (stock_info['stock_class'] != "受益證券") else None
     stock_info['week_52_change_percent'] = round(stock.info['52WeekChange'],3) if '52WeekChange' in stock.info else None
     stock_info['revenuePerShare'] = stock.info['revenuePerShare'] if 'revenuePerShare' in stock.info else None
 

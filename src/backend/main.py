@@ -2,7 +2,7 @@
 Author: hibana2077 hibana2077@gmail.com
 Date: 2024-02-02 17:41:30
 LastEditors: hibana2077 hibana2077@gmail.com
-LastEditTime: 2024-02-05 15:28:55
+LastEditTime: 2024-02-05 21:44:00
 FilePath: /nexus/src/backend/main.py
 Description: This is a FastAPI application that uses the Fugle API to get stock information.
 '''
@@ -68,7 +68,7 @@ async def hotstock():
 @app.get("/news")
 async def news():
     url = 'https://news.cnyes.com/news/cat/tw_stock'
-    base_url = 'https://news.cnyes.com/'
+    base_url = 'https://news.cnyes.com'
     class_ = 'tlhuwq2'
     res = requests.get(url)
     res.encoding = 'utf-8'

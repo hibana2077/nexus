@@ -179,11 +179,6 @@
         id: "28",
         name: "電子零組件業",
         value: "28"
-    },
-    {
-        id: "00",
-        name: "未分類",
-        value: "00"
     }
 ];
     const url = 'http://0.0.0.0:8000/findstock';

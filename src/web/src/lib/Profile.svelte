@@ -24,28 +24,28 @@
           </p>
         </div>
         <div class="hover:border-solid hover:border-2 rounded-box hover:border-primary bg-base-300 tooltip" data-tip="股價淨值評估">
-          <p class="text-center">
+          <p class="text-center py-10">
             <strong>
               {bookValue_evaulate}
             </strong>
           </p>
         </div>
         <div class="hover:border-solid hover:border-2 rounded-box hover:border-primary bg-base-300 tooltip" data-tip="現金股利評估">
-          <p class="text-center">
+          <p class="text-center py-10">
             <strong>
               {dividend_evaulate}
             </strong>
           </p>
         </div>
         <div class="hover:border-solid hover:border-2 rounded-box hover:border-primary bg-base-300 tooltip" data-tip="股價淨值評估合理價">
-          <p class="text-center">
+          <p class="text-center py-10">
             <strong>
               {bookValue}
             </strong>
           </p>
         </div>
         <div class="hover:border-solid hover:border-2 rounded-box hover:border-primary bg-base-300 tooltip" data-tip="現金股利評估合理價">
-          <p class="text-center">
+          <p class="text-center py-10">
             <strong>
               {fair_price}
             </strong>

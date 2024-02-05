@@ -49,7 +49,6 @@
           <select class="select select-bordered join-item">
             <option disabled selected>Filter</option>
             <option>Stock</option>
-            <option>ETF</option>
             <option>Warrant</option>
           </select>
           <div class="indicator">

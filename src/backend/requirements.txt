@@ -3,3 +3,5 @@ uvicorn[standard]
 ping3
 requests
 yfinance
+pandas
+numpy

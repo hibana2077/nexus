@@ -1,25 +1,34 @@
-'''
-Author: hibana2077 hibana2077@gmail.com
-Date: 2024-02-04 16:22:51
-LastEditors: hibana2077 hibana2077@gmail.com
-LastEditTime: 2024-02-04 17:58:35
-FilePath: /nexus/src/backend/test.py
-Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
-'''
-from fugle import Fugle
-client = Fugle('MTJiNTVmYzgtYThlNC00MjAyLWFlYzAtMDBhMzMzMGVhMTZiIGYwODA4MzFiLTQxNzMtNDMzOC1hZDgyLTFkYzJkZGUwNmZhOA==')
-temp_data = client.get_index_price()
-print('\n'.join([f'{k} has {len(v[:180])} klines' for k,v in temp_data.items()]))
-temp_data = {k:v[:180] for k,v in client.get_index_price().items()}
-output_list = []
-for k,v in temp_data.items():
-    for i in v:
-        i.pop('open')
-        i.pop('high')
-        i.pop('low')
-        i.pop('volume')
-        i['group'] = k
-        output_list.append(i)
+# import time
 
-print(f"total {len(output_list)} klines, should be 180*{len(temp_data)} = {180*len(temp_data)}")
-# print(client.get_all_index())
+# import torch
+# import torch.nn as nn
+
+# s = time.time()
+
+# target = torch.tensor(89.64)
+# now = torch.tensor(102.87)
+
+# loss = nn.SmoothL1Loss()(target, now)
+
+# e = time.time()
+
+# print(f"Time: {e-s}, Loss: {loss}")
+
+# import yfinance as yf
+
+# stock = yf.Ticker('1303.TW')
+# print(stock.history(period='2d').diff().Close[1])
+# from info import dividend_fair_evaluation
+
+# print(dividend_fair_evaluation(0.05, 0.9, '6136'))
+from bs4 import BeautifulSoup
+import requests
+
+url = 'https://news.cnyes.com/news/cat/tw_stock'
+class_ = 'tlhuwq2'
+res = requests.get(url)
+res.encoding = 'utf-8'
+soup = BeautifulSoup(res.text, 'html.parser')
+stocks = soup.find_all('a', class_=class_)
+for s in stocks:
+    print(s.text)

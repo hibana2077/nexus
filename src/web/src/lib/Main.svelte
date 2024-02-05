@@ -1,42 +1,63 @@
 <script>
-    // @ts-nocheck
-    import '@carbon/charts-svelte/styles.css';
-    import { BarChartSimple, ChartTheme, LineChart } from '@carbon/charts-svelte';
+  // @ts-nocheck
+  import '@carbon/charts-svelte/styles.css';
+  import { ChartTheme, LineChart } from '@carbon/charts-svelte';
 
-    let stock_data = [
-        { group: 'IX0001', value: 17590, date: "2018-12-31T16:00:00.000Z"},
-        { group: 'IX0001', value: 17580, date: "2019-01-01T16:00:00.000Z"},
-        { group: 'IX0001', value: 17590, date: "2019-01-02T16:00:00.000Z"},
-        { group: 'IX0001', value: 17580, date: "2019-01-03T16:00:00.000Z"},
-        { group: 'IX0001', value: 17586, date: "2019-01-04T16:00:00.000Z"},
-        { group: 'IX0001', value: 17588, date: "2019-01-05T16:00:00.000Z"},
-        { group: 'IX0001', value: 17530, date: "2019-01-06T16:00:00.000Z"},
-        { group: 'IX0001', value: 17520, date: "2019-01-07T16:00:00.000Z"},
-        { group: 'IX0001', value: 17510, date: "2019-01-08T16:00:00.000Z"},
-        { group: 'IX0001', value: 17500, date: "2019-01-09T16:00:00.000Z"},
-        { group: 'IX0001', value: 17490, date: "2019-01-10T16:00:00.000Z"},
-        { group: 'IX0001', value: 17480, date: "2019-01-11T16:00:00.000Z"},
-        { group: 'IX0001', value: 17470, date: "2019-01-12T16:00:00.000Z"},
-        { group: 'IX0001', value: 17460, date: "2019-01-13T16:00:00.000Z"},
-        { group: 'IX0001', value: 17450, date: "2019-01-14T16:00:00.000Z"},
-        { group: 'IX0001', value: 17440, date: "2019-01-15T16:00:00.000Z"},
-        { group: 'IX0186', value: 150.24, date: "2018-12-31T16:00:00.000Z"},
-        { group: 'IX0186', value: 150.05, date: "2019-01-01T16:00:00.000Z"},
-        { group: 'IX0186', value: 150.66, date: "2019-01-02T16:00:00.000Z"},
-        { group: 'IX0186', value: 148.05, date: "2019-01-03T16:00:00.000Z"},
-        { group: 'IX0186', value: 150.24, date: "2019-01-04T16:00:00.000Z"},
-        { group: 'IX0186', value: 150.05, date: "2019-01-05T16:00:00.000Z"},
-        { group: 'IX0186', value: 150.01, date: "2019-01-06T16:00:00.000Z"},
-        { group: 'IX0186', value: 150.23, date: "2019-01-07T16:00:00.000Z"},
-        { group: 'IX0186', value: 150.24, date: "2019-01-08T16:00:00.000Z"},
-        { group: 'IX0186', value: 150.29, date: "2019-01-09T16:00:00.000Z"},
-        { group: 'IX0186', value: 150.55, date: "2019-01-10T16:00:00.000Z"},
-        { group: 'IX0186', value: 150.66, date: "2019-01-11T16:00:00.000Z"},
-        { group: 'IX0186', value: 130.24, date: "2019-01-12T16:00:00.000Z"},
-        { group: 'IX0186', value: 135.05, date: "2019-01-13T16:00:00.000Z"},
-        { group: 'IX0186', value: 125.24, date: "2019-01-14T16:00:00.000Z"},
-        { group: 'IX0186', value: 170.05, date: "2019-01-15T16:00:00.000Z"}
-    ]
+  let stock_data;
+  async function get_data() {
+      try {
+          const res = await fetch('http://0.0.0.0:8000/mainpage/indexprice', {
+              method: 'GET'
+          });
+
+          if (!res.ok) {
+              throw new Error(`HTTP error! status: ${res.status}`);
+          }
+
+          stock_data = await res.json();  // 直接將響應轉換為 JSON
+      } catch (error) {
+          console.error('Error fetching data: ', error);
+      }
+  }
+  let hotstock;
+  let top1;
+  async function get_hotstock() {
+      try {
+          const res = await fetch('http://0.0.0.0:8000/hotstock', {
+              method: 'GET'
+          });
+
+          if (!res.ok) {
+              throw new Error(`HTTP error! status: ${res.status}`);
+          }
+
+          hotstock = await res.json();  // 直接將響應轉換為 JSON
+          top1 = hotstock[0]['symbol'];
+      } catch (error) {
+          console.error('Error fetching data: ', error);
+      }
+  }
+
+  let news;
+  async function get_news() {
+      try {
+          const res = await fetch('http://0.0.0.0:8000/news', {
+              method: 'GET'
+          });
+
+          if (!res.ok) {
+              throw new Error(`HTTP error! status: ${res.status}`);
+          }
+
+          news = await res.json();  // 直接將響應轉換為 JSON
+      } catch (error) {
+          console.error('Error fetching data: ', error);
+      }
+  }
+
+  get_news();
+  get_hotstock();
+  get_data();
 </script>
 
 <div class="flex my-4 mx-4">
@@ -60,38 +81,24 @@
             </thead>
             <tbody>
               <!-- row 1 -->
-              <tr>
+              <!-- <tr>
                 <th></th>
                 <td>Apple releases new iPhone</td>
                 <td>Apple releases new iPhone, which is the most powerful iPhone ever</td>
                 <td><a href="https://www.apple.com/iphone-13-pro/" target="_blank">Link</a></td>
-              </tr>
-              <!-- row 2 -->
-              <tr>
-                <th></th>
-                <td>TSMC to build new factory in Japan</td>
-                <td>Dr. C.C. Wei, CEO of TSMC, announced that TSMC will build a new factory in Japan</td>
-                <td>Purple</td>
-              </tr>
-              <!-- row 3 -->
-              <tr>
-                <th></th>
-                <td>Brice Swyre</td>
-                <td>Tax Accountant</td>
-                <td>Red</td>
-              </tr>
-              <tr>
-                <th></th>
-                <td>Brice Swyre</td>
-                <td>Tax Accountant</td>
-                <td>Red</td>
-              </tr>
-              <tr>
-                <th></th>
-                <td>Brice Swyre</td>
-                <td>Tax Accountant</td>
-                <td>Red</td>
-              </tr>
+              </tr> -->
+              {#if news}
+                {#each news as item}
+                  <tr>
+                    <th></th>
+                    <td>{item.title}</td>
+                    <td>fake abs</td>
+                    <td><a href={item.link} target="_blank">Link</a></td>
+                  </tr>
+                {/each}
+              {:else}
+                <p>Loading...</p>
+              {/if}
             </tbody>
           </table>
           <div class="flex join p-2">
@@ -109,7 +116,11 @@
             </div>
         </h2>
         <div class="flex items-start">
-            <iframe title="Stock Chart" frameBorder='0' scrolling='no' width='450' height='225' src='https://api.stockdio.com/visualization/financial/charts/v1/SingleQuote?app-key=8534C99CCADD4AFDB1D17BD809453DD7&stockExchange=TWSE&symbol=2409&showLogo=No&palette=Aurora&width=450px&height=225px'></iframe>
+            {#if top1}
+              <iframe title="Stock Chart" frameBorder='0' scrolling='no' width='450' height='225' src='https://api.stockdio.com/visualization/financial/charts/v1/SingleQuote?app-key=8534C99CCADD4AFDB1D17BD809453DD7&stockExchange=TWSE&symbol={top1}&showLogo=No&palette=Aurora&width=450px&height=225px'></iframe>
+            {:else}
+              <p>Loading...</p>
+            {/if}
         </div>
     </div>
   </div>
@@ -133,26 +144,30 @@
               bottom: { mapsTo: 'group', scaleType: 'labels' }
           }
       }} /> -->
-    <LineChart
-    style="padding:2rem;"
-      data={stock_data}
-      options={{
-            theme: ChartTheme.G100,
-            title: 'Stock Price',
-            axes: {
-                bottom: {
-                    title: 'Time',
-                    mapsTo: 'date',
-                    scaleType: 'time'
-                },
-                left: {
-                    mapsTo: 'value',
-                    title: 'Stock Price',
-                    scaleType: 'log'
-                }
-            },
-            curve: 'curveMonotoneX',
-            height: '500px'
-      }} />
+    {#if stock_data}
+      <LineChart
+      style="padding:2rem;"
+        data={stock_data}
+        options={{
+              theme: ChartTheme.G100,
+              title: 'Stock Price',
+              axes: {
+                  bottom: {
+                      title: 'Time',
+                      mapsTo: 'date',
+                      scaleType: 'time'
+                  },
+                  left: {
+                      mapsTo: 'close',
+                      title: 'Stock Price',
+                      scaleType: 'log'
+                  }
+              },
+              curve: 'curveMonotoneX',
+              height: '500px'
+        }} />
+    {:else}
+      <p>Loading...</p>
+    {/if}
 </div>
   

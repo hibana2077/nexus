@@ -2,11 +2,12 @@
 Author: hibana2077 hibana2077@gmail.com
 Date: 2024-02-02 15:25:19
 LastEditors: hibana2077 hibana2077@gmail.com
-LastEditTime: 2024-02-04 17:24:20
+LastEditTime: 2024-02-05 09:38:56
 FilePath: /stock/fugle.py
 Description: This is a simple Python wrapper for the Fugle API.
 '''
 import requests
+import yfinance as yf
 
 class Fugle:
     def __init__(self, token):
@@ -88,3 +89,14 @@ class Fugle:
                 return []
             temp_data[map_data[symbol]] = response.json()['data']
         return temp_data
+    
+    def get_specific_stock(self, industry:str, price:int):
+        price = "&price={}".format(price) if price < 100 else ""
+        base_url = "https://api.fugle.tw/marketdata/v1.0/stock/snapshot/actives/TSE?industry={}".format(industry)
+        base_url += price
+        response = requests.get(base_url, headers=self.headers)
+        if response.status_code == 403:
+            return "Your Subscription Plan does not support this API endpoint."
+        elif response.status_code != 200:
+            return []
+        return response.json()['data']

@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@bentogrid/core": "^1.1.1",
+    "got": "^14.2.0",
     "lightweight-charts": "^4.1.2",
     "plotly.js-dist-min": "^2.29.0"
   }

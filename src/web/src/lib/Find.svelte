@@ -248,7 +248,7 @@
         <span>5%</span>
         </div>
         <div class="divider divider-start">股息合理價-安全係數</div>
-        <input type="range" min="0" max="1" value="1" class="range" step="0.2" id="safety" />
+        <input type="range" min="0" max="1" value="0.8" class="range" step="0.2" id="safety" />
         <div class="w-full flex justify-between text-xs px-2">
         <span>0</span>
         <span>0.2</span>

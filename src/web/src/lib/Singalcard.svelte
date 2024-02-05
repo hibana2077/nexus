@@ -66,12 +66,14 @@
         <div class="text-center my-8 text-xl {stock_color_set.prev_day_change}">
             {#if stock_basic_info.week_52_change_percent > 0}
                 + {stock_basic_info.week_52_change_percent}%
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto fill-green-500" viewBox="0 0 512 512"><path d="M414 321.94L274.22 158.82a24 24 0 00-36.44 0L98 321.94c-13.34 15.57-2.28 39.62 18.22 39.62h279.6c20.5 0 31.56-24.05 18.18-39.62z"/></svg>
             {:else if stock_basic_info.week_52_change_percent < 0}
                 {stock_basic_info.week_52_change_percent}%
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto fill-red-500" viewBox="0 0 512 512"><path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z"/></svg>
             {:else}
                 {stock_basic_info.week_52_change_percent}%
             {/if}
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto fill-green-500" viewBox="0 0 512 512"><path d="M414 321.94L274.22 158.82a24 24 0 00-36.44 0L98 321.94c-13.34 15.57-2.28 39.62 18.22 39.62h279.6c20.5 0 31.56-24.05 18.18-39.62z"/></svg>
+            
         </div>
     </div>
     <div class="bg-base-300 hover:border-solid hover:border-2 rounded-box hover:border-primary row-span-2 col-span-3 tooltip" data-tip="股票資訊">

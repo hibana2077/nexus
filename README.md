@@ -2,7 +2,7 @@
  * @Author: hibana2077 hibana2077@gmail.com
  * @Date: 2024-02-02 17:40:31
  * @LastEditors: hibana2077 hibana2077@gmaill.com
- * @LastEditTime: 2024-02-05 17:42:29
+ * @LastEditTime: 2024-02-05 17:45:19
  * @FilePath: /nexus/README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -22,7 +22,7 @@
 ## 介紹
 
 NEXUS 是一個使用 Svelte 3 + Tailwind CSS + Vite + FastAPI + Docker 開發的 Web App。</br>
-它可以幫助你快速找到有淺力的台股。
+透過選擇股票產業類別、輸入一些偏好條件，可以找到符合條件的潛力股票。</br>
 
 ## 功能
 

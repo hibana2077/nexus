@@ -8,7 +8,7 @@
 -->
 <script src="https://cdn.tailwindcss.com"></script>
 
-# NEXUS
+<h1 class="text-4xl font-bold text-center">Nexus</h1>
 
 ![Svelte](https://img.shields.io/badge/Svelte-FF3E00?style=for-the-badge&logo=svelte&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)

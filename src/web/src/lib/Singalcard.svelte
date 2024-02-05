@@ -63,9 +63,9 @@
         </div>
     </div>
     <div class="bg-base-300 hover:border-solid hover:border-2 rounded-box hover:border-primary row-span-3 col-span-1 tooltip" data-tip="52週變化">
-        <div class="text-center my-8 text-xl {stock_color_set.prev_day_change}">
+        <div class="text-center my-8 text-base {stock_color_set.prev_day_change}">
             {#if stock_basic_info.week_52_change_percent > 0}
-                + {stock_basic_info.week_52_change_percent}%
+                {stock_basic_info.week_52_change_percent}%
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto fill-green-500" viewBox="0 0 512 512"><path d="M414 321.94L274.22 158.82a24 24 0 00-36.44 0L98 321.94c-13.34 15.57-2.28 39.62 18.22 39.62h279.6c20.5 0 31.56-24.05 18.18-39.62z"/></svg>
             {:else if stock_basic_info.week_52_change_percent < 0}
                 {stock_basic_info.week_52_change_percent}%
@@ -96,7 +96,7 @@
             </div>
         </div>
     </div>
-    <button class="bg-base-300 rounded-box row-span-2 col-span-2 hover:glass transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 tooltip" data-tip="Click to see more" on:click={() => showmore("2330")}>
+    <button class="bg-base-300 rounded-box row-span-2 col-span-2 hover:glass transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 tooltip" data-tip="Click to see more" on:click={() => showmore(stock_basic_info.code, stock_basic_info.name)}>
         <div class="text-center my-6 text-xl {stock_color_set.ai_recommend}">
             <!-- AI recommend -->
             <strong>

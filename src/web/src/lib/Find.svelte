@@ -186,14 +186,23 @@
         value: "00"
     }
 ];
+    const url = 'http://0.0.0.0:8000/findstock';
     let select_condition = {
         cat: [],
-        price: 25
+        price: 25,
+        dividend: 3,
+        safety: 0.8
     }
 
     let stock_num = writable("");
+    let stock_name = writable("");
+    let have_a_search = writable(false);
+    let searchjob_done = writable(false);
+    let search_result = writable([]);
 
     function Search() {
+        have_a_search.set(false);
+        searchjob_done.set(false);
         let cat = [];
         document.querySelectorAll('.checkbox').forEach((el) => {
             if (el.checked) {
@@ -204,11 +213,38 @@
         select_condition.price = document.querySelector('#price').value;
         select_condition.dividend = document.querySelector('#dividend').value;
         select_condition.safety = document.querySelector('#safety').value;
+
+        select_condition.price = select_condition.price.toString();
+        select_condition.dividend = select_condition.dividend.toString();
+        select_condition.safety = select_condition.safety.toString();
+
         console.log(select_condition);
+        console.log(JSON.stringify(select_condition));
+        have_a_search.set(true);
+
+        // make a request to the server
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(select_condition)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            searchjob_done.set(true);
+            search_result.set(data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     }
 
-    function showmore(stock_id) {
+    function showmore(stock_id, name) {
         stock_num.set(stock_id);
+        stock_name.set(name);
         popup.showModal();
     }
 </script>
@@ -275,15 +311,19 @@
 </h2>
 
 <div class="flex items-center justify-center mt-8">
-    <div class="grid grid-cols-2 gap-4">
-        <Singalcard showmore={showmore} />
-        <Singalcard showmore={showmore} />
-        <Singalcard showmore={showmore} />
-        <Singalcard showmore={showmore} />
-        <Singalcard showmore={showmore} />
-        <Singalcard showmore={showmore} />
-    </div>
+    {#if $have_a_search && $searchjob_done}
+        <div class="grid grid-cols-2 gap-4">
+            {#each $search_result as stock}
+                <Singalcard stock_basic_info={stock} showmore={showmore} />
+            {/each}
+        </div>
+    {:else if $have_a_search && !$searchjob_done}
+        <span class="loading loading-ring loading-lg"></span>
+    {:else}
+        <span></span>
+    {/if}
 </div>
 
-<!-- <button class="btn" onclick="stock.showModal()">open modal</button> -->
-<Profile stock_id="{$stock_num}" dialog_id="popup" />
+{#if $stock_num}
+    <Profile stock_id={$stock_num} dialog_id="popup" stock_name={$stock_name} />
+{/if}

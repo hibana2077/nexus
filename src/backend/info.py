@@ -2,7 +2,7 @@
 Author: hibana2077 hibana2077@gmail.com
 Date: 2024-02-02 15:55:26
 LastEditors: hibana2077 hibana2077@gmail.com
-LastEditTime: 2024-02-04 23:56:57
+LastEditTime: 2024-02-05 13:39:29
 FilePath: /stock/info.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -65,12 +65,13 @@ def get_stock_info(stock:str):
     stock += '.TW'
     stock:Ticker = yf.Ticker(stock)
     stock_info['bookValue'] = stock.info['bookValue'] if 'bookValue' in stock.info else None
-    stock_info['priceToBook'] = stock.info['priceToBook'] if 'priceToBook' in stock.info else None
+    stock_info['priceToBook'] = round(stock.info['priceToBook'],5) if 'priceToBook' in stock.info else None
     stock_info['eps'] = stock.info['trailingEps'] if 'trailingEps' in stock.info else None
     stock_info['income'] = stock.info['netIncomeToCommon'] if 'netIncomeToCommon' in stock.info else None
-    stock_info['price'] = stock.history(period='1d').Close[0]
-    stock_info['prev_day_change'] = stock.history(period='2d').diff().Close[1]
-    stock_info['week_52_change_percent'] = stock.info['52WeekChange'] if '52WeekChange' in stock.info else None
+    stock_info['price'] = round(stock.history(period='1d').Close[0],2) if 'B' not in stock_info['code'] else None
+    stock_info['prev_day_change'] = round(stock.history(period='2d').diff().Close[1],2) if 'B' not in stock_info['code'] else None
+    stock_info['week_52_change_percent'] = round(stock.info['52WeekChange'],3) if '52WeekChange' in stock.info else None
+    stock_info['revenuePerShare'] = stock.info['revenuePerShare'] if 'revenuePerShare' in stock.info else None
 
     return stock_info
 
@@ -109,9 +110,10 @@ def dividend_fair_evaluation(dividend_rate:float, safety:float, stock_num:str):
         'buy_price':buy_price,
         'recommendation':recommendation,
         'stock_price':stock_price,
-        'loss': nn.SmoothL1Loss()(torch.tensor(fair_price), torch.tensor(stock_price)).item(),
-        'diff': stock_price - fair_price}
+        'loss': round(nn.SmoothL1Loss()(torch.tensor(fair_price), torch.tensor(stock_price)).item(),3),
+        'diff': round(stock_price - fair_price,3)}
     
-    for k,v in basic_info.items():return_data[k] = v
+    if basic_info:
+        for k,v in basic_info.items():return_data[k] = v
 
     return return_data

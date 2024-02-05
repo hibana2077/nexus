@@ -2,7 +2,7 @@
 Author: hibana2077 hibana2077@gmail.com
 Date: 2024-02-02 17:41:30
 LastEditors: hibana2077 hibana2077@gmail.com
-LastEditTime: 2024-02-05 10:43:32
+LastEditTime: 2024-02-05 15:28:55
 FilePath: /nexus/src/backend/main.py
 Description: This is a FastAPI application that uses the Fugle API to get stock information.
 '''
@@ -61,8 +61,8 @@ async def hotstock():
     stock_num = soup.find_all('span', class_=class_num)
     return_data = []
     for s,sn in zip(stocks, stock_num):
-        if sn.text.split('.')[-1] == 'TW':
-            return_data.append({'symbol': sn.text.split('.')[0], 'name': s.text})
+        if sn.text.split('.')[-1] == 'TW' and sn.text.split('.')[0].isnumeric():
+            return_data.append({'symbol': sn.text.split('.')[0]})
     return return_data
 
 @app.get("/news")
@@ -129,6 +129,9 @@ async def profile(data: dict):
     - dividend_rate (user input) eg: 0.05
     - safety (user input) eg: 0.9
     """
+    print(data)
+    if data['stock'] == '':
+        return {'error':'stock code is empty'}
     return_data = {}
 
     # Get stock information from Yahoo Finance.
@@ -136,14 +139,14 @@ async def profile(data: dict):
     stockyf:Ticker = yf.Ticker(yf_stock_code)
 
     # Get stock name
-    return_data['stock_name'] = info.get_stock_info(stock)['stock_name']
+    return_data['stock_name'] = info.get_stock_info(data['stock'])['name']
 
     # Get book value evaulate
     return_data['bookValue'] = stockyf.info['bookValue']
     return_data['bookValue_evaulate'] = '昂貴價' if stockyf.info['priceToBook'] > 2 else '合理價' if stockyf.info['priceToBook'] >= 1 else '便宜價'
 
     # Get dividend evaulate
-    temp_data = info.dividend_fair_evaluation(data['dividend_rate'], data['safety'], data['stock'])
+    temp_data = info.dividend_fair_evaluation(float(data['dividend_rate'])/100, float(data['safety']), data['stock'])
     return_data['fair_price'] = temp_data['fair_price']
     return_data['buy_price'] = temp_data['buy_price']
     return_data['dividend_evaulate'] = temp_data['recommendation']
@@ -152,18 +155,29 @@ async def profile(data: dict):
 
 @app.post("/findstock")
 async def findstock(data: dict):
+    print(data)
     cats = data['cat'] # 產業類別 list
-    price = data['price']
-    dividend_rate = data['dividend']
-    safety = data['safety']
+    price = float(data['price'])
+    dividend_rate = float(data['dividend'])/100
+    safety = float(data['safety'])
     whitelist = []
-    return_data = {}
+    return_data = []
     for cat in cats:
         client = Fugle(API_TOKEN)
         data = client.get_specific_stock(cat, price)
         whitelist += data
     for stock in whitelist:# stock -> {'symbol': '2330', 'name': '台積電'}
         temp_data = info.dividend_fair_evaluation(dividend_rate, safety, stock['symbol'])
+        temp_info = info.get_stock_info(stock['symbol'])
         if temp_data['recommendation'] == '買進':
-            return_data[stock['symbol']] = temp_data
+            return_data.append({'code':stock['symbol'],
+                                'name':stock['name'],
+                                'price':temp_data['stock_price'],
+                                'prev_day_change':temp_info['prev_day_change'],
+                                'week_52_change_percent':round(temp_info['week_52_change_percent']*100,1),
+                                'eps':temp_info['eps'],
+                                'income':temp_info['revenuePerShare'],
+                                'ai_recommend':'Good',
+                                'buy_price':temp_data['buy_price'],
+                                'fair_price':temp_data['fair_price']})
     return return_data

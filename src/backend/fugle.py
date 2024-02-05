@@ -2,7 +2,7 @@
 Author: hibana2077 hibana2077@gmail.com
 Date: 2024-02-02 15:25:19
 LastEditors: hibana2077 hibana2077@gmail.com
-LastEditTime: 2024-02-05 09:38:56
+LastEditTime: 2024-02-05 12:41:10
 FilePath: /stock/fugle.py
 Description: This is a simple Python wrapper for the Fugle API.
 '''
@@ -89,14 +89,28 @@ class Fugle:
                 return []
             temp_data[map_data[symbol]] = response.json()['data']
         return temp_data
-    
+
+    def last_price(self, stock:str):
+        """
+        Get the last price of a stock.
+
+        Args:
+            stock (str): The stock symbol.
+
+        Returns:
+            float: The last price of the stock.
+        """
+        stockyf = yf.Ticker(stock + '.TW')
+        price = stockyf.history(period='1d').Close[0] if 'B' not in stock else 1000000
+        return price
+
     def get_specific_stock(self, industry:str, price:int):
-        price = "&price={}".format(price) if price < 100 else ""
-        base_url = "https://api.fugle.tw/marketdata/v1.0/stock/snapshot/actives/TSE?industry={}".format(industry)
-        base_url += price
+        base_url = "https://api.fugle.tw/marketdata/v1.0/stock/intraday/tickers?type=EQUITY&exchange=TWSE&industry={}".format(industry)
         response = requests.get(base_url, headers=self.headers)
         if response.status_code == 403:
             return "Your Subscription Plan does not support this API endpoint."
         elif response.status_code != 200:
             return []
-        return response.json()['data']
+        data = response.json()['data']
+        return_data = [t for t in data if self.last_price(t['symbol']) < price] if price < 100 else data
+        return return_data

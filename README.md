@@ -1,8 +1,8 @@
 <!--
  * @Author: hibana2077 hibana2077@gmail.com
  * @Date: 2024-02-02 17:40:31
- * @LastEditors: hibana2077 hibana2077@gmaill.com
- * @LastEditTime: 2024-02-05 18:07:00
+ * @LastEditors: hibana2077 hibana2077@gmail.com
+ * @LastEditTime: 2024-02-05 23:19:15
  * @FilePath: /nexus/README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -42,6 +42,8 @@ NEXUS 是一個使用 Svelte 3 + Tailwind CSS + Vite + FastAPI + Docker 開發�
 
 [Demo](https://nexus.hibana2077.com)
 
+NEXUS 目前部署在 DigitalOcean 上，可以直接點擊連結查看。(Not Ready)
+
 ### 本地安裝
 
 1. 下載專案
@@ -50,20 +52,41 @@ NEXUS 是一個使用 Svelte 3 + Tailwind CSS + Vite + FastAPI + Docker 開發�
 git clone https://github.com/hibana2077/nexus.git
 ```
 
-2. 安裝Docker 與 Docker Compose
+2. 安裝前端
 
-3. 啟動專案
+```bash
+cd nexus/src/web
+npm install
+```
+
+3. 安裝後端
+
+```bash
+cd nexus/src/api
+pip install -r requirements.txt
+```
+
+4. 啟動專案
 
 ```bash
 cd nexus
-docker-compose up
+cd src/api
+uvicorn main:app --host 0.0.0.0 --port 8000
+cd ../web
+npm run dev -- --host
 ```
 
-4. 開啟瀏覽器
+## Screenshot
 
-```bash
-http://localhost:3000
-```
+![Main](https://media.discordapp.net/attachments/956596033163505684/1204081787077263360/image.png?ex=65d36f8c&is=65c0fa8c&hm=eaca1474cf3f1e5491ba8a38851990df6cd2967125eb67296a837b9c7325f38b&=&format=webp&quality=lossless&width=603&height=468)
+
+![Filter](https://media.discordapp.net/attachments/956596033163505684/1204082066745069679/image.png?ex=65d36fcf&is=65c0facf&hm=715e434feec2a401ea6a9c8ae78c5ae0960f6f01a0227ea8c2c71cf8f2640e88&=&format=webp&quality=lossless&width=342&height=468)
+
+![Result1](https://media.discordapp.net/attachments/956596033163505684/1204082233191960596/image.png?ex=65d36ff7&is=65c0faf7&hm=4a7421402e103d8d2ced19996cdef6a09837be43e548df2e9bfde43bfcfbbb0d&=&format=webp&quality=lossless)
+
+![Result2](https://media.discordapp.net/attachments/956596033163505684/1204082389673058324/image.png?ex=65d3701c&is=65c0fb1c&hm=373749169f01fb6b9710ddca3886ba61d0364770a221c5368e5d38f9d23aba05&=&format=webp&quality=lossless)
+
+![Result3](https://media.discordapp.net/attachments/956596033163505684/1204082526654562385/image.png?ex=65d3703d&is=65c0fb3d&hm=0e244c4015e69ffe401c50c2f7db80250639486479e5f262ccea8a51367ce1e8&=&format=webp&quality=lossless&width=840&height=468)
 
 ## License
 

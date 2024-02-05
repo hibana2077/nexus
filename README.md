@@ -6,7 +6,11 @@
  * @FilePath: /nexus/README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
-# NEXUS
+<p align="center">
+  <img src="https://raw.githubusercontent.com/hibana2077/nexus/main/public/logo.svg" alt="NEXUS" width="200" />
+</p>
+
+<h1 align="center">NEXUS</h1>
 
 ![Svelte](https://img.shields.io/badge/Svelte-FF3E00?style=for-the-badge&logo=svelte&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)

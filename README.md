@@ -31,3 +31,4 @@ NEXUS 是一個使用 Svelte 3 + Tailwind CSS + Vite + FastAPI + Docker 開發�
 - [x] 單一股票查詢
 - [x] 按條件篩選股票
 - [x] 即時股價(K線圖)
+- [x] 個股資訊

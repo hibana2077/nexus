@@ -2,7 +2,7 @@
  * @Author: hibana2077 hibana2077@gmail.com
  * @Date: 2024-02-02 17:40:31
  * @LastEditors: hibana2077 hibana2077@gmaill.com
- * @LastEditTime: 2024-02-05 17:45:19
+ * @LastEditTime: 2024-02-05 18:07:00
  * @FilePath: /nexus/README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -32,3 +32,39 @@ NEXUS 是一個使用 Svelte 3 + Tailwind CSS + Vite + FastAPI + Docker 開發�
 - [x] 按條件篩選股票
 - [x] 即時股價(K線圖)
 - [x] 個股資訊
+
+## 安裝
+
+- [Demo](###Demo)
+- [本地安裝](###本地安裝)
+
+### Demo
+
+[Demo](https://nexus.hibana2077.com)
+
+### 本地安裝
+
+1. 下載專案
+
+```bash
+git clone https://github.com/hibana2077/nexus.git
+```
+
+2. 安裝Docker 與 Docker Compose
+
+3. 啟動專案
+
+```bash
+cd nexus
+docker-compose up
+```
+
+4. 開啟瀏覽器
+
+```bash
+http://localhost:3000
+```
+
+## License
+
+![GitHub](https://img.shields.io/github/license/hibana2077/nexus?style=for-the-badge)

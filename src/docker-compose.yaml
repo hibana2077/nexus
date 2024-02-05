@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+
+  api:
+    build: ./backend
+    container_name: api
+    ports:
+      - "8000:8000"
+    networks:
+      - my_network
+    dns:
+      - "8.8.8.8"
+
+  web:
+    build: ./web
+    container_name: web
+    ports:
+      - "80:5173"
+    depends_on:
+      - api
+    networks:
+      - my_network
+    dns:
+      - "8.8.8.8"
+
+networks:
+  my_network:
+    driver: bridge

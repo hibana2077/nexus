@@ -42,7 +42,7 @@ NEXUS 是一個使用 Svelte 3 + Tailwind CSS + Vite + FastAPI + Docker 開發�
 
 [Demo](https://nexus.hibana2077.com)
 
-NEXUS 目前部署在 DigitalOcean 上，可以直接點擊連結查看。(Not Ready)
+NEXUS 目前部署在台東大學的某間實驗室的電腦。(Not Ready)
 
 ### 本地安裝
 

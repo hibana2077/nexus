@@ -181,7 +181,8 @@
         value: "28"
     }
 ];
-    const url = 'http://0.0.0.0:8000/findstock';
+    const API_SERVER_URL = import.meta.env.VITE_API_SERVER_URL;
+    const url = API_SERVER_URL + 'findstock';
     let select_condition = {
         cat: [],
         price: 25,
@@ -248,7 +249,7 @@
         stock_name.set(name);
 
         // search stock detail
-        const url = 'http://0.0.0.0:8000/profile/singlestock';
+        const url = API_SERVER_URL + 'profile/singlestock';
         fetch(url, {
             method: 'POST',
             headers: {

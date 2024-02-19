@@ -3,10 +3,11 @@
   import '@carbon/charts-svelte/styles.css';
   import { ChartTheme, LineChart } from '@carbon/charts-svelte';
 
+  const API_SERVER_URL = import.meta.env.VITE_API_SERVER_URL;
   let stock_data;
   async function get_data() {
       try {
-          const res = await fetch('http://0.0.0.0:8000/mainpage/indexprice', {
+          const res = await fetch( API_SERVER_URL + 'mainpage/indexprice', {
               method: 'GET'
           });
 
@@ -23,7 +24,7 @@
   let top1;
   async function get_hotstock() {
       try {
-          const res = await fetch('http://0.0.0.0:8000/hotstock', {
+          const res = await fetch( API_SERVER_URL + 'hotstock', {
               method: 'GET'
           });
 
@@ -41,7 +42,7 @@
   let news;
   async function get_news() {
       try {
-          const res = await fetch('http://0.0.0.0:8000/news', {
+          const res = await fetch( API_SERVER_URL + 'news', {
               method: 'GET'
           });
 

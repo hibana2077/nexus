@@ -1,8 +1,8 @@
 <!--
  * @Author: hibana2077 hibana2077@gmail.com
  * @Date: 2024-02-02 17:40:31
- * @LastEditors: hibana2077 hibana2077@gmaill.com
- * @LastEditTime: 2024-02-06 11:56:52
+ * @LastEditors: hibana2077 hibana2077@gmail.com
+ * @LastEditTime: 2024-02-20 17:19:43
  * @FilePath: /nexus/README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -40,7 +40,7 @@ NEXUS 是一個使用 Svelte 3 + Tailwind CSS + Vite + FastAPI + Docker 開發�
 
 ### Demo
 
-[Demo](https://nexus.hibana2077.com)
+[Demo](http://project.hibana2077.com/)
 
 NEXUS 目前部署在台東大學的某間實驗室的電腦。(Not Ready)
 

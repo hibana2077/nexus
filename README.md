@@ -2,7 +2,7 @@
  * @Author: hibana2077 hibana2077@gmail.com
  * @Date: 2024-02-02 17:40:31
  * @LastEditors: hibana2077 hibana2077@gmail.com
- * @LastEditTime: 2024-03-16 21:18:45
+ * @LastEditTime: 2024-03-16 21:21:39
  * @FilePath: /nexus/README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -84,11 +84,11 @@ npm run dev -- --host
 
 ![Filter](./img/Find.png)
 
-![Result1](./img//result1.png)
+![Result1](./img/result1.png)
 
-![Result2](https://media.discordapp.net/attachments/956596033163505684/1204082389673058324/image.png?ex=65d3701c&is=65c0fb1c&hm=373749169f01fb6b9710ddca3886ba61d0364770a221c5368e5d38f9d23aba05&=&format=webp&quality=lossless)
+![Result2](./img/result2.png)
 
-![Result3](https://media.discordapp.net/attachments/956596033163505684/1204082526654562385/image.png?ex=65d3703d&is=65c0fb3d&hm=0e244c4015e69ffe401c50c2f7db80250639486479e5f262ccea8a51367ce1e8&=&format=webp&quality=lossless&width=840&height=468)
+![Result3](./img/result3.png)
 
 </p>
 

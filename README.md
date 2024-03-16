@@ -7,7 +7,7 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <p align="center">
-  <img src="https://raw.githubusercontent.com/hibana2077/nexus/main/public/logo.svg" alt="NEXUS" width="200" />
+  <img src="./NEXUS.png" alt="NEXUS" width="200" />
 </p>
 
 <h1 align="center">NEXUS</h1>

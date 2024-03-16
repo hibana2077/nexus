@@ -2,7 +2,7 @@
  * @Author: hibana2077 hibana2077@gmail.com
  * @Date: 2024-02-02 17:40:31
  * @LastEditors: hibana2077 hibana2077@gmail.com
- * @LastEditTime: 2024-03-16 21:13:04
+ * @LastEditTime: 2024-03-16 21:18:45
  * @FilePath: /nexus/README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -80,11 +80,11 @@ npm run dev -- --host
 
 <p align="center">
 
-![Main](https://media.discordapp.net/attachments/956596033163505684/1204081787077263360/image.png?ex=65d36f8c&is=65c0fa8c&hm=eaca1474cf3f1e5491ba8a38851990df6cd2967125eb67296a837b9c7325f38b&=&format=webp&quality=lossless&width=603&height=468)
+![Main](./img/Home.png)
 
-![Filter](https://media.discordapp.net/attachments/956596033163505684/1204082066745069679/image.png?ex=65d36fcf&is=65c0facf&hm=715e434feec2a401ea6a9c8ae78c5ae0960f6f01a0227ea8c2c71cf8f2640e88&=&format=webp&quality=lossless&width=342&height=468)
+![Filter](./img/Find.png)
 
-![Result1](https://media.discordapp.net/attachments/956596033163505684/1204082233191960596/image.png?ex=65d36ff7&is=65c0faf7&hm=4a7421402e103d8d2ced19996cdef6a09837be43e548df2e9bfde43bfcfbbb0d&=&format=webp&quality=lossless)
+![Result1](./img//result1.png)
 
 ![Result2](https://media.discordapp.net/attachments/956596033163505684/1204082389673058324/image.png?ex=65d3701c&is=65c0fb1c&hm=373749169f01fb6b9710ddca3886ba61d0364770a221c5368e5d38f9d23aba05&=&format=webp&quality=lossless)
 
